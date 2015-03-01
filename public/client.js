@@ -3,36 +3,41 @@
  * @author Hitesh
  */
 
-var app = angular.module("Blogger",[]);
+// define main module
+var app = angular.module("Blogger", []);
 
-app.controller("BlogController",['$scope','$http',function($scope,$http){
-	$scope.blogs = [
-//	              {title: "Title 1", description: 'Description 1', author: 'Author 1'},
-//	              {title: "Title 2", description: 'Description 2', author: 'Author 2'},
-//	              {title: "Title 3", description: 'Description 3', author: 'Author 3'}
-	              ];
+// define blog controller along with dependent services to be injected 
+app.controller("BlogController", [
+		'$scope',
+		'$http',
+		'$window',
+		function($scope, $http, $window) {
+			$scope.blogs = [];
 
-	$scope.blog = {title: '', description: '', author: ''};
-	
-//	this.listBlogs();
-	
-//	this.listBlogs = function(){
-		$http.get('/blog-api/list/').success(function(data){
-			console.log(data);
-			$scope.blogs = data;
-		});
-//	};
-	
-	$scope.addBlog = function(){
-		
-		$http.post('/blog-api/create/',$scope.blog)
-			.success(function(data){
-			console.log(data);
-			alert("Record saved successfully");
-			$scope.blog = {title: '', description: '', author: ''};
-		});
-		
-	};
-	
-}]);
+			$scope.blog = {
+				title : '',
+				description : '',
+				author : ''
+			};
 
+			// fetch all blog posts
+			$http.get('/blog-api/list/').success(function(data) {
+				console.log(data);
+				$scope.blogs = data;
+			});
+
+			// function to add blog post
+			$scope.addBlog = function() {
+
+				$http.post('/blog-api/create/', $scope.blog).success(
+						function(data) {
+							console.log(data);
+							alert("Blog post saved successfully");
+							// redirect to listing page
+							$window.location = '/';
+						}).error(function(err,status){
+					        alert("Error in saving blog post");      
+					    });
+			};
+
+		} ]);

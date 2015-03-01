@@ -1,11 +1,12 @@
 /**
- * Blogger Model
+ * Blog Model
  * @author Hitesh
  */
 
+// initialize mongoose service
 var mongoose = require("mongoose");
-//mongoose.connect('mongodb://localhost/mydb');
-mongoose.connect('mongodb://node:node2434@ds031721.mongolab.com:31721/heroku_app34476373');
+var mongodb_uri = process.env.MONGODB_URI || 'mongodb://localhost/mydb';  
+mongoose.connect(mongodb_uri);
 
 
 // define the schema for blog document
@@ -17,28 +18,28 @@ var blogSchema = mongoose.Schema({
 
 // create a model for this schema that maps
 // to collection of blog documents in the DB.
-var Blogger = mongoose.model("Blogger", blogSchema);
+var blog = mongoose.model("blog", blogSchema);
 
-// public method to create blog document from API req
+// public method to create blog document as requested
 exports.createBlog = function(req, res) {
-	console.log("blog:" + req.body);
 	var blogObject = req.body;
-	Blogger.create(blogObject, function(err, todo) {
+	console.log("blog to be created:" + blogObject);
+	blog.create(blogObject, function(err, blog) {
 		console.log("err:" + err);
-		console.log("blog:" + blogObject);
+		console.log("blog saved:" + blogObject);
 		if (err) {
 			res.send(err);
 		} else {
-			res.json(todo);
+			res.json(blog);
 		}
 	});
 };
 
-// public method to provide list of blog documents from API req
+// public method to provide list of blog documents as requested
 exports.listBlogs = function(req, res) {
-	Blogger.find(function(err, blogs) {
+	blog.find(function(err, blogs) {
 		console.log("err:" + err);
-		console.log("blogs:" + blogs);
+		console.log("blog list:" + blogs);
 		if (err) {
 			res.send(err);
 		} else {

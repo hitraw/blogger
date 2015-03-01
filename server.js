@@ -1,4 +1,3 @@
-
 /**
  * Server side Express script
  * @author Hitesh
@@ -30,15 +29,15 @@ if ('development' === app.get('env')) {
 }
 
 // model dependency
-var blogger = require('./models/Blogger');
+var blog = require('./models/BlogModel');
 
 // define url mapping for web pages
 app.get('/', routes.index); // home page
 app.get('/new', routes.add); // add blog page
 
 // define url mapping for REST APIs
-app.get('/blog-api/list', blogger.listBlogs); 
-app.post('/blog-api/create', blogger.createBlog); 
+app.get('/blog-api/list', blog.listBlogs); 
+app.post('/blog-api/create', blog.createBlog); 
 
 // start server
 http.createServer(app).listen(app.get('port'), function(){

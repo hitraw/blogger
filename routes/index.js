@@ -1,15 +1,15 @@
 
 /**
- * Route mapping for web templates
+ * Route mapping for web views
  * @author Hitesh
  */
 
 // home page
 exports.index = function(req, res){
-  res.render('index', { title: 'Blogger' });
+  res.render('index', { title: 'Mini Blogger' });
 };
 
-// add blod page
+// add blog page
 exports.add = function(req, res){
-  res.render('add', { title: 'Blogger' });
+  res.render('add', { title: 'Mini Blogger' });
 };

@@ -4,7 +4,9 @@
  */
 
 var mongoose = require("mongoose");
-mongoose.connect('mongodb://localhost/mydb');
+//mongoose.connect('mongodb://localhost/mydb');
+mongoose.connect('mongodb://node:node2434@ds031721.mongolab.com:31721/heroku_app34476373');
+
 
 // define the schema for blog document
 var blogSchema = mongoose.Schema({

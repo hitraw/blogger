@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title><%= title %></title>
+<link rel='stylesheet'
+	href='//netdna.bootstrapcdn.com/bootstrap/3.3.2/
+		css/bootstrap.min.css' />
+<link rel='stylesheet' href='/stylesheets/style.css' />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+<script src="client.js"></script>
+
+</head>
+<body ng-app="Blogger">
+	<nav class="navbar navbar-fixed-top navbar-inverse">
+		<div class="container">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="/"><%= title %></a>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container" id="sidebar">
+		<form name="blogForm" ng-controller="BlogController"
+			ng-submit="blogForm.$valid && addBlog()" novalidate>
+
+			<br /> <label><b>Title</b></label>
+					<span style="color: red"> * </span>
+			
+			<input type="text" name="title" class="form-control"
+				ng-model="blog.title" size="40" required></input> <br /> <label><b>Description</b></label>
+				<span style="color: red"> * </span>
+			<textarea class="form-control" name="description"
+				ng-model="blog.description" rows="5" cols="40" required></textarea>
+			<br /> <label><b>Author (Email)</b></label> 
+			<span style="color: red"> * 
+				<span ng-show="blogForm.$submitted && blogForm.uEmail.$error.email"> Not a valid email address </span>
+			</span>
+			<br /> <input type="email" name="uEmail" class="form-control"
+				ng-model="blog.author" size="40" required></input> <br />
+			<button type="submit" class="btn btn-default">Submit</button>
+			<span style="color: red"
+				ng-show="blogForm.$submitted && !blogForm.$valid"> Please
+				enter valid values in all mandatory fields</span>
+		</form>
+	</div>
+
+
+
+</body>
+</html>

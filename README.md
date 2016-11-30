@@ -1,7 +1,7 @@
 
 
 # Blogger
-Simple mini-blogger app
+Simple mini-blogger app (http://mini-blogger.herokuapp.com/)
 
 
 ## Usage
